@@ -1,0 +1,20 @@
+books = glob_wildcards('resources/books/{book}.txt').book
+
+rule all:
+    input:
+        expand('results/defs/{book}.txt', book=books)
+
+rule clean:
+    shell: 'rm -f results/*'
+
+rule count_words:
+    input: 'resources/books/{book}.txt'
+    output: 'results/{book}.dat'
+    shell:  'python workflow/scripts/wordcount.py {input} {output}'
+
+rule define_words:
+    input: 'results/{book}.dat'
+    output: 'results/defs/{book}.txt'
+    threads: 4
+    conda: 'envs/scraping.yml'
+    shell:  'python workflow/scripts/define.py {input} {output} {threads}'

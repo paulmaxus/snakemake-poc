@@ -1,0 +1,3 @@
+.snakemake/
+results/
+workflow/scripts/__pycache__/

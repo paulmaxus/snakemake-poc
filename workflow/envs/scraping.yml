@@ -1,0 +1,8 @@
+channels:
+ - conda-forge
+dependencies:
+ - python=3.10
+ - beautifulsoup4
+ - requests
+ - pandas
+ - selenium
